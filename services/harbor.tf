@@ -72,4 +72,26 @@ resource "helm_release" "harbor" {
     name  = "database.external.existingSecret"
     value = "db-postgresql"
   }
+  set {
+    name  = "core.extraEnvVars[0].name"
+    value = "CONFIG_OVERWRITE_JSON"
+  }
+  set {
+    name  = "core.extraEnvVars[0].value"
+    value = <<EOF
+        {
+          "auth_mode": "oidc_auth",
+          "oidc_name": "Github",
+          "oidc_endpoint": "https://github.com/login/oauth/authorize",
+          "oidc_groups_claim": "argocd",
+          "oidc_admin_group": "argocd",
+          "oidc_client_id": var.gh_client_id_argocd,
+          "oidc_client_secret": var.gh_client_secret_argocd,
+          "oidc_scope": "openid,email,profile,offline_access",
+          "oidc_verify_cert": "false",
+          "oidc_auto_onboard": "true",
+        }
+    EOF
+  }
 }
+

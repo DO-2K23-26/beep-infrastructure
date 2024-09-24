@@ -32,6 +32,13 @@ resource "helm_release" "argocd" {
   }
 
   set {
+    name  = "configs.rbac.policy\\.ghgroup\\.csv"
+    value = <<-EOT
+      g\, DO-2K23-26:argocd\, role:admin
+    EOT
+  }
+
+  set {
     name  = "configs.params.server\\.insecure"
     value = "true"
   }

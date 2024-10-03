@@ -21,77 +21,11 @@ resource "helm_release" "postgres-harbor" {
     value = "registry"
   }
 }
-
 resource "helm_release" "harbor" {
   depends_on = [helm_release.postgres-harbor, kubectl_manifest.clusterissuer_letsencrypt_prod]
   name       = "harbor"
   repository = "https://helm.goharbor.io"
   chart      = "harbor"
   namespace  = "harbor"
-  set {
-    name  = "expose.tls.enabled"
-    value = "true"
-  }
-  set {
-    name  = "expose.tls.certSource"
-    value = "secret"
-  }
-  set {
-    name  = "expose.tls.secret.secretName"
-    value = "harbor-tls"
-  }
-  set {
-    name  = "expose.ingress.hosts.core"
-    value = "registry.${var.domain_name}"
-  }
-  set {
-    name  = "expose.ingress.annotations.cert-manager\\.io/cluster-issuer"
-    value = "letsencrypt-prod"
-  }
-  set {
-    name  = "externalURL"
-    value = "https://registry.${var.domain_name}"
-  }
-  set {
-    name  = "database.type"
-    value = "external"
-  }
-  set {
-    name  = "database.external.host"
-    value = "db-postgresql.harbor.svc.cluster.local"
-  }
-  set {
-    name  = "database.external.username"
-    value = "postgres"
-  }
-  set {
-    name  = "database.external.coreDatabase"
-    value = "registry"
-  }
-  set {
-    name  = "database.external.existingSecret"
-    value = "db-postgresql"
-  }
-  set {
-    name  = "core.extraEnvVars[0].name"
-    value = "CONFIG_OVERWRITE_JSON"
-  }
-  set {
-    name  = "core.extraEnvVars[0].value"
-    value = <<-EOF
-  {
-    \"auth_mode\": \"oidc_auth\"
-    \"oidc_name\": \"Github\"
-    \"oidc_endpoint\": \"https://github.com/login/oauth/authorize\"
-    \"oidc_groups_claim\": \"beep\"
-    \"oidc_admin_group\": \"beep\"
-    \"oidc_client_id\": \"${var.gh_client_id_harbor}\"
-    \"oidc_client_secret\": \"${var.gh_client_secret_harbor}\"
-    \"oidc_scope\": \"openid\"
-    \"oidc_verify_cert\": false
-    \"oidc_auto_onboard\": true
-  }
-  EOF
-  }
-
+  values     = [file("values.yaml")]
 }

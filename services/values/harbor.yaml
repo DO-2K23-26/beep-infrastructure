@@ -1,0 +1,38 @@
+expose:
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: harbor-tls
+  ingress:
+    hosts:
+      core: registry.${var.domain_name}
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+
+externalURL: https://registry.${var.domain_name}
+
+database:
+  type: external
+  external:
+    host: db-postgresql.harbor.svc.cluster.local
+    username: postgres
+    coreDatabase: registry
+    existingSecret: db-postgresql
+
+core:
+  extraEnvVars:
+    - name: CONFIG_OVERWRITE_JSON
+      value: |
+        {
+          "auth_mode": "oidc_auth",
+          "oidc_name": "Github",
+          "oidc_endpoint": "https://github.com/login/oauth/authorize",
+          "oidc_groups_claim": "beep",
+          "oidc_admin_group": "beep",
+          "oidc_client_id": "${var.gh_client_id_harbor}",
+          "oidc_client_secret": "${var.gh_client_secret_harbor}",
+          "oidc_scope": "openid",
+          "oidc_verify_cert": false,
+          "oidc_auto_onboard": true
+        }

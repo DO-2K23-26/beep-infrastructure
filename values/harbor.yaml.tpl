@@ -27,7 +27,7 @@ core:
         {
           "auth_mode": "oidc_auth",
           "oidc_name": "Github",
-          "oidc_endpoint": "https://github.com/login/oauth/authorize",
+          "oidc_endpoint": "https://github.com/login/oauth/",
           "oidc_groups_claim": "beep",
           "oidc_admin_group": "beep",
           "oidc_client_id": "${gh_client_id_harbor}",

@@ -24,7 +24,7 @@ resource "helm_release" "postgres-harbor" {
 resource "helm_release" "harbor" {
   depends_on = [helm_release.postgres-harbor, kubectl_manifest.clusterissuer_letsencrypt_prod]
   name       = "harbor"
-  repository = "https://helm.goharbor.io"
+  repository = "https://charts.bitnami.com/bitnami"
   chart      = "harbor"
   namespace  = "harbor"
 

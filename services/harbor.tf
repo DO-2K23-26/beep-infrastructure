@@ -78,7 +78,7 @@ resource "helm_release" "harbor" {
   }
   set {
     name  = "core.extraEnvVars[0].value"
-    value = <<-EOT
+    value = <<-EOF
   {
     \"auth_mode\": \"oidc_auth\"
     \"oidc_name\": \"Github\"
@@ -91,7 +91,7 @@ resource "helm_release" "harbor" {
     \"oidc_verify_cert\": false
     \"oidc_auto_onboard\": true
   }
-  EOT
+  EOF
   }
 
 }

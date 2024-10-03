@@ -79,7 +79,7 @@ resource "helm_release" "harbor" {
   set {
     name  = "core.extraEnvVars[0].value"
     value = <<EOT
-    "{
+    {
       "auth_mode" : "oidc_auth"
       "oidc_name" : "Github"
       "oidc_endpoint" : "https://github.com/login/oauth/authorize"
@@ -90,7 +90,7 @@ resource "helm_release" "harbor" {
       "oidc_scope" : "openid"
       "oidc_verify_cert" : "false"
       "oidc_auto_onboard" : "true"
-    }"
+    }
     EOT
   }
 }

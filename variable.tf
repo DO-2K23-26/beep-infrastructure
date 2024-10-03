@@ -19,3 +19,14 @@ variable "gh_client_secret_argocd" {
   type        = string
   description = "GitHub client secret for argocd"
 }
+
+variable "gh_client_id_harbor" {
+  type        = string
+  description = "GitHub client ID for harbor"
+
+}
+
+variable "gh_client_secret_harbor" {
+  type        = string
+  description = "GitHub client secret for harbor"
+}

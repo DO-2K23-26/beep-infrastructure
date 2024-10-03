@@ -36,30 +36,18 @@ plan:
   stage: plan
   script:
     - terraform show
-    - |
-      terraform plan \
-      -var kubeconfig=${KUBECONFIG} \
-      -var "gh_client_id_argocd=${GH_CLIENT_ID_ARGOCD}" \
-      -var "gh_client_secret_argocd=${GH_CLIENT_SECRET_ARGOCD}" 
+    - terraform plan
 
 apply:
   stage: apply
   script:
-    - |
-      terraform apply -auto-approve \
-      -var kubeconfig=${KUBECONFIG} \
-      -var "gh_client_id_argocd=${GH_CLIENT_ID_ARGOCD}" \
-      -var "gh_client_secret_argocd=${GH_CLIENT_SECRET_ARGOCD}" 
+    - terraform apply -auto-approve 
   when: manual
 
 destroy:
   stage: destroy
   script:
-    - |
-      terraform destroy -auto-approve \
-      -var kubeconfig=${KUBECONFIG} \
-      -var "gh_client_id_argocd=${GH_CLIENT_ID_ARGOCD}" \
-      -var "gh_client_secret_argocd=${GH_CLIENT_SECRET_ARGOCD}" 
+    - terraform destroy -auto-approve 
 
   when: manual
   

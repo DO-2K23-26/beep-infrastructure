@@ -27,5 +27,13 @@ resource "helm_release" "harbor" {
   repository = "https://helm.goharbor.io"
   chart      = "harbor"
   namespace  = "harbor"
-  values     = [file("values/harbor.yaml")]
+
+  values = [
+    templatefile("values/harbor.yaml.tpl", {
+      domain_name             = var.domain_name
+      gh_client_id_harbor     = var.gh_client_id_harbor
+      gh_client_secret_harbor = var.gh_client_secret_harbor
+    })
+  ]
+
 }

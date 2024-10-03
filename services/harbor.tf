@@ -27,5 +27,5 @@ resource "helm_release" "harbor" {
   repository = "https://helm.goharbor.io"
   chart      = "harbor"
   namespace  = "harbor"
-  values     = [file("values.yaml")]
+  values     = [file("./values/harbor.yaml")]
 }

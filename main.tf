@@ -4,3 +4,8 @@ module "services" {
   gh_client_id_argocd     = var.gh_client_id_argocd
   gh_client_secret_argocd = var.gh_client_secret_argocd
 }
+
+module "network" {
+  source = "./network"
+
+}

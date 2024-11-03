@@ -74,5 +74,8 @@ resource "helm_release" "minio" {
     name  = "ingress.tls[0].hosts[0]"
     value = "minio.${var.domain_name}"
   }
-
+  set {
+    name  = "replicas"
+    value = "2"
+  }
 }

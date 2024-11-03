@@ -26,8 +26,6 @@ before_script:
     -backend-config=unlock_method=DELETE \
     -backend-config=retry_wait_min=5
     
-
-
 plan:
   stage: plan
   script:

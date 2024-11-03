@@ -78,4 +78,9 @@ resource "helm_release" "minio" {
     name  = "replicas"
     value = "2"
   }
+
+  set {
+    name  = "resources.requests.memory"
+    value = "1Gi"
+  }
 }

@@ -1,6 +1,6 @@
 resource "helm_release" "minio" {
   name             = "minio"
-  repository       = "https://charts.min.io/"
+  repository       = "https://charts.min.io"
   chart            = "minio"
   depends_on       = [kubectl_manifest.clusterissuer_letsencrypt_prod]
   namespace        = "minio"

@@ -21,7 +21,7 @@ resource "helm_release" "minio" {
 
   set {
     name  = "ingress.hostname"
-    value = "minio-api.${var.domain_name}"
+    value = "minio.${var.domain_name}"
   }
 
   set {

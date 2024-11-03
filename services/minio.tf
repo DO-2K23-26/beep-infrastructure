@@ -4,10 +4,11 @@ resource "helm_release" "minio" {
   chart            = "minio"
   depends_on       = [kubectl_manifest.clusterissuer_letsencrypt_prod]
   namespace        = "minio"
+  version          = "14.8.1"
   create_namespace = true
 
 
-// Ingress configuration for web-ui
+  // Ingress configuration for web-ui
   set {
     name  = "ingress.enabled"
     value = "true"
@@ -80,20 +81,20 @@ resource "helm_release" "minio" {
   }
 
 
-// Buckets
-set {
-  name  = "buckets[0].name"
-  value = "beep-staging"
-}
+  // Buckets
+  set {
+    name  = "buckets[0].name"
+    value = "beep-staging"
+  }
 
-set {
-  name  = "buckets[0].versioning"
-  value = "Versionning"
-}
+  set {
+    name  = "buckets[0].versioning"
+    value = "Versionning"
+  }
 
-set {
-  name  = "buckets[0].withLock"
-  value = "true"
-}
+  set {
+    name  = "buckets[0].withLock"
+    value = "true"
+  }
 
 }

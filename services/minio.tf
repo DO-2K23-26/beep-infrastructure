@@ -1,86 +1,99 @@
 resource "helm_release" "minio" {
   name             = "minio"
-  repository       = "https://charts.min.io"
+  repository       = "https://charts.bitnami.com/bitnami"
   chart            = "minio"
   depends_on       = [kubectl_manifest.clusterissuer_letsencrypt_prod]
   namespace        = "minio"
   create_namespace = true
 
 
-  // Minio server
+// Ingress configuration for web-ui
   set {
     name  = "ingress.enabled"
     value = "true"
   }
-  set {
-    name  = "ingress.annotations.cert-manager\\.io/cluster-issuer"
-    value = "letsencrypt-prod"
-  }
+
   set {
     name  = "ingress.ingressClassName"
     value = "traefik"
   }
 
   set {
-    name  = "ingress.path"
-    value = "/"
+    name  = "ingress.hostname"
+    value = "minio-api.${var.domain_name}"
   }
 
   set {
-    name  = "ingress.hosts[0]"
-    value = "minio-server.${var.domain_name}"
-  }
-
-  set {
-    name  = "ingress.tls[0].secretName"
-    value = "minio-server-tls"
-  }
-  set {
-    name  = "ingress.tls[0].hosts[0]"
-    value = "minio-server.${var.domain_name}"
-  }
-
-  // Minio ui
-  set {
-    name  = "consoleIngress.enabled"
-    value = "true"
-  }
-
-  set {
-    name  = "consoleIngress.annotations.cert-manager\\.io/cluster-issuer"
+    name  = "ingress.annotations.cert-manager\\.io/cluster-issuer"
     value = "letsencrypt-prod"
   }
 
   set {
-    name  = "consoleIngress.ingressClassName"
+    name  = "ingress.tls"
+    value = "true"
+  }
+
+  // Api ingress
+
+  set {
+    name  = "apiIngress.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "apiIngress.ingressClassName"
     value = "traefik"
   }
 
   set {
-    name  = "consoleIngress.path"
-    value = "/"
+    name  = "apiIngress.hostname"
+    value = "minio-api.${var.domain_name}"
   }
 
   set {
-    name  = "consoleIngress.hosts[0]"
-    value = "minio.${var.domain_name}"
+    name  = "apiIngress.annotations.cert-manager\\.io/cluster-issuer"
+    value = "letsencrypt-prod"
   }
 
   set {
-    name  = "ingress.tls[0].secretName"
-    value = "minio-tls"
-  }
-  set {
-    name  = "ingress.tls[0].hosts[0]"
-    value = "minio.${var.domain_name}"
-  }
-  set {
-    name  = "replicas"
-    value = "2"
+    name  = "apiIngress.tls"
+    value = "true"
   }
 
   set {
-    name  = "resources.requests.memory"
-    value = "1Gi"
+    name  = "mode"
+    value = "distributed"
   }
+
+  set {
+    name  = "statefulset.replicaCount"
+    value = "4"
+  }
+
+  set {
+    name  = "provisioning.enabled"
+    value = "true"
+  }
+  set {
+    name  = "persistence.size"
+    value = "20Gi"
+  }
+
+
+// Buckets
+set {
+  name  = "buckets[0].name"
+  value = "beep-staging"
+}
+
+set {
+  name  = "buckets[0].versioning"
+  value = "Versionning"
+}
+
+set {
+  name  = "buckets[0].withLock"
+  value = "true"
+}
+
 }

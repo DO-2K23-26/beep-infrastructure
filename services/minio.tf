@@ -94,7 +94,7 @@ resource "helm_release" "minio" {
 
   set {
     name  = "buckets[0].withLock"
-    value = "true"
+    value = "false"
   }
 
 }

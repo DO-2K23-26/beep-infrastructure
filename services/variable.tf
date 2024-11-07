@@ -13,3 +13,8 @@ variable "gh_client_secret_argocd" {
   type        = string
   description = "GitHub client secret for argocd"
 }
+
+variable "gitlab_runner_token" {
+  type       = string
+  description = "Gitlab runner token"
+}

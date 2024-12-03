@@ -28,7 +28,3 @@ provider "kubectl" {
 provider "kubernetes" {
   config_path = var.kubeconfig
 }
-terraform {
-  backend "http" {
-  }
-}

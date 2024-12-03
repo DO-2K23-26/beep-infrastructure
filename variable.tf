@@ -1,13 +1,19 @@
 variable "kubeconfig" {
   type        = string
-  description = "Paht to the kubeconfig file"
+  description = "Path to the kubeconfig file"
   default     = "~/.kube/config"
+}
+
+variable "stunner_port" {
+  type = number
+  description = "The port that will be use by the stunner endpoint"
+  default = 33436
 }
 
 variable "domain_name" {
   type        = string
   description = "Domaine name"
-  default     = "beep.ovh"
+  default     = "duratm.com"
 }
 
 variable "gh_client_id_argocd" {

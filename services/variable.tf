@@ -1,7 +1,7 @@
 variable "domain_name" {
   type        = string
   description = "Domaine name"
-  default     = "beep.ovh"
+  default     = "duratm.com"
 }
 
 variable "gh_client_id_argocd" {

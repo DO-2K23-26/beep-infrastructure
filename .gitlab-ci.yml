@@ -1,7 +1,6 @@
 stages:
   - plan
   - apply
-  - destroy
 
 image:
   name: hashicorp/terraform:light
@@ -38,12 +37,5 @@ apply:
   stage: apply
   script:
     - terraform apply -auto-approve 
-  when: manual
-
-destroy:
-  stage: destroy
-  script:
-    - terraform destroy -auto-approve 
-
   when: manual
   

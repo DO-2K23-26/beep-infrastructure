@@ -1,10 +1,9 @@
 resource "helm_release" "uptime_kuma" {
-  depends_on = [ kubectl_manifest.clusterissuer_letsencrypt_prod ]
-  name             = "uptime-kuma"
-  repository       = "https://helm.irsigler.cloud"
-  chart            = "uptime-kuma"
-  namespace        = "monitoring"
-  create_namespace = true
+  depends_on = [kubectl_manifest.clusterissuer_letsencrypt_prod, kubernetes_namespace.monitoring]
+  name       = "uptime-kuma"
+  repository = "https://helm.irsigler.cloud"
+  chart      = "uptime-kuma"
+  namespace  = "monitoring"
   set {
     name  = "ingress.enabled"
     value = "true"

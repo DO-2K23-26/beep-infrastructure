@@ -8,6 +8,7 @@ resource "helm_release" "Loki" {
   values = [
     <<-EOF
       loki:
+        auth_enabled: false
         schemaConfig:
           configs:
             - from: "2024-04-01"

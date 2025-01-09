@@ -28,6 +28,9 @@ resource "helm_release" "Loki" {
         ruler:
           enable_api: true
 
+      chunksCache:
+        allocatedMemory: 2048
+
       minio:
         enabled: true
 

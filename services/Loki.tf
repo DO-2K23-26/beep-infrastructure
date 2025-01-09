@@ -1,7 +1,7 @@
 resource "helm_release" "Loki" {
   depends_on = [kubernetes_namespace.monitoring]
   repository = "https://grafana.github.io/helm-charts"
-  chart      = "loki-stack"
+  chart      = "loki"
   name       = "loki"
   namespace  = kubernetes_namespace.monitoring.metadata.0.name
 

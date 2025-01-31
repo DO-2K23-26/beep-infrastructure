@@ -13,7 +13,7 @@ variable "stunner_port" {
 variable "domain_name" {
   type        = string
   description = "Domaine name"
-  default     = "duratm.com"
+  default     = "beep.ovh"
 }
 
 variable "gh_client_id_argocd" {

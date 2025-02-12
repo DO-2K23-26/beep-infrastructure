@@ -6,5 +6,4 @@ variable "stunner_deployed" {
 variable "stunner_port" {
   type = number
   description = "The port that will be use by the stunner endpoint"
-  default = 33436
 }

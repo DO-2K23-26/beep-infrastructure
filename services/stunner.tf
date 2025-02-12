@@ -7,7 +7,7 @@ resource "helm_release" "stunner_gateway_operator" {
   create_namespace = true
   set {
     name  = "stunnerGatewayOperator.dataplane.spec.hostNetwork"
-    value = "false"
+    value = "true"
   }
 
   set {

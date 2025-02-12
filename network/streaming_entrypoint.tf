@@ -52,6 +52,9 @@ resource "kubernetes_manifest" "udp_gateway" {
     "metadata" = {
       "name"      = "udp-gateway"
       "namespace" = "stunner"
+      "annotations" = {
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+      }
     }
     "spec" = {
       "gatewayClassName" = "stunner-gatewayclass"
@@ -60,6 +63,22 @@ resource "kubernetes_manifest" "udp_gateway" {
           "name"     = "udp-listener"
           "port"     = var.stunner_port
           "protocol" = "TURN-UDP"
+        },
+        {
+          "name"     = "tls-listener"
+          "port"     = 443
+          "protocol" = "TURN-TLS"
+          "hostname" = "stunner.${var.domain_name}"
+          "tls" = {
+            "mode" = "Terminate"
+            "certificateRefs" = [
+              {
+                "kind"      = "Secret"
+                "namespace" = "stunner"
+                "name"      = "tls-secret"
+              }
+            ]
+          }
         }
       ]
     }

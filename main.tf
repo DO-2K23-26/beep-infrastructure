@@ -10,4 +10,5 @@ module "network" {
   source = "./network"
   stunner_port = var.stunner_port
   stunner_deployed = module.services.stunner_deployed
+  domain_name = var.domain_name
 }

@@ -11,7 +11,6 @@ resource "kubernetes_manifest" "stunner_gateway_class" {
     "kind"       = "GatewayClass"
     "metadata" = {
       "name" = "stunner-gatewayclass"
-      "namespace" = "stunner"
     }
     "spec" = {
       "controllerName" = "stunner.l7mp.io/gateway-operator"
@@ -19,6 +18,7 @@ resource "kubernetes_manifest" "stunner_gateway_class" {
         "group"     = "stunner.l7mp.io"
         "kind"      = "GatewayConfig"
         "name"      = "stunner-gatewayconfig"
+        "namespace" = "stunner"
       }
       "description" = "STUNner is a WebRTC ingress gateway for Kubernetes"
     }

@@ -8,7 +8,18 @@ resource "helm_release" "cert-manager" {
     name  = "crds.enabled"
     value = "true"
   }
-
+  set {
+    name = "config.apiVersion"
+    value = "controller.config.cert-manager.io/v1alpha1"
+  }
+  set {
+    name = "config.kind"
+    value = "ControllerConfiguration"
+  }
+  set {
+    name = "config.enableGatewayAPI"
+    value = "true"
+  }
 }
 
 resource "kubectl_manifest" "clusterissuer_letsencrypt_prod" {

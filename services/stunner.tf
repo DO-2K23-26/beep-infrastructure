@@ -29,7 +29,8 @@ resource "kubernetes_manifest" "stunner_gateway_operator" {
           stunnerGatewayOperator:
             dataplane:
               spec:
-                hostNetwork: true
+                hostNetwork: false
+                enableMetricsEndpoint: true
           EOT
         }
       }

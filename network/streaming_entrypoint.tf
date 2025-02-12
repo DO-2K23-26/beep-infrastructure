@@ -11,6 +11,7 @@ resource "kubernetes_manifest" "stunner_gateway_class" {
     "kind"       = "GatewayClass"
     "metadata" = {
       "name" = "stunner-gatewayclass"
+      "namespace" = "stunner"
     }
     "spec" = {
       "controllerName" = "stunner.l7mp.io/gateway-operator"

@@ -5,10 +5,6 @@ resource "helm_release" "stunner_gateway_operator" {
   namespace        = "stunner-system"
   version          = "0.21.0"
   create_namespace = true
-  set {
-    name  = "stunnerGatewayOperator.dataplane.spec.hostNetwork"
-    value = "true"
-  }
 
   set {
     name  = "stunnerGatewayOperator.dataplane.spec.enableMetricsEndpoint"

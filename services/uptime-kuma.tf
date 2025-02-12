@@ -1,5 +1,5 @@
 resource "helm_release" "uptime_kuma" {
-  depends_on = [kubernetes_manifest.clusterissuer_letsencrypt_prod, kubernetes_namespace.monitoring]
+  depends_on = [kubectl_manifest.clusterissuer_letsencrypt_prod, kubernetes_namespace.monitoring]
   name       = "uptime-kuma"
   repository = "https://helm.irsigler.cloud"
   chart      = "uptime-kuma"

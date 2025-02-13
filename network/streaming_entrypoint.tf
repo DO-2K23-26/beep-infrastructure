@@ -53,7 +53,7 @@ resource "kubernetes_manifest" "udp_gateway" {
       "name"      = "udp-gateway"
       "namespace" = "stunner"
       "annotations" = {
-        "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+        "cert-manager.io/issuer" = "letsencrypt-prod"
       }
     }
     "spec" = {

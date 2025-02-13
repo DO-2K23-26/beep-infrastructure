@@ -66,7 +66,7 @@ resource "kubernetes_manifest" "udp_gateway" {
         },
         {
           "name"     = "tls-listener"
-          "port"     = 443
+          "port"     = 8080
           "protocol" = "TURN-TLS"
           "hostname" = "stunner.${var.domain_name}"
           "tls" = {

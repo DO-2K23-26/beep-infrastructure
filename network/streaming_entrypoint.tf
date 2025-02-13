@@ -53,7 +53,8 @@ resource "kubernetes_manifest" "udp_gateway" {
       "name"      = "udp-gateway"
       "namespace" = "stunner"
       "annotations" = {
-        "cert-manager.io/issuer" = "letsencrypt-prod"
+        "cert-manager.io/cluster-issuer" = "letsencrypt-prod"
+        "stunner.l7mp.io/enable-mixed-protocol-lb" = "true"
       }
     }
     "spec" = {
@@ -73,7 +74,7 @@ resource "kubernetes_manifest" "udp_gateway" {
             "mode" = "Terminate"
             "certificateRefs" = [
               {
-                "name"      = "tls-secret"
+                "name"      = "stunner-tls"
               }
             ]
           }

@@ -73,8 +73,6 @@ resource "kubernetes_manifest" "udp_gateway" {
             "mode" = "Terminate"
             "certificateRefs" = [
               {
-                "kind"      = "Secret"
-                "namespace" = "stunner"
                 "name"      = "tls-secret"
               }
             ]

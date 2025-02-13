@@ -9,8 +9,16 @@ resource "helm_release" "cert-manager" {
     value = "true"
   }
   set {
-    name = "extraArgs"
-    value = "{--enable-gateway-api}"
+    name = "config.apiVersion"
+    value = "controller.config.cert-manager.io/v1alpha1"
+  }
+  set {
+    name = "config.kind"
+    value = "ControllerConfiguration"
+  }
+  set {
+    name = "config.enableGatewayAPI"
+    value = "true"
   }
 }
 
